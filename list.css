@@ -27,14 +27,14 @@ body {
     margin-bottom: 20px;
     margin-left: auto;
     margin-right: auto;
-    padding-top: 10px; /* 添加內边距，避免與其他內容重疊 */
-    position: fixed; /* 固定位置 */
-    top: 0; /* 距離頂部距離 */
-    left: -100; /* 距離左邊距離 */
-    right: 10; /* 距離右邊距離 */
-    background-color: #334288; /* 背景顏色 */
-    z-index: 999; /* 指定層級，確保在最上層顯示 */
-    border-radius: 0; /* 去除圓角 */
+    padding-top: 10px;
+    position: fixed;
+    top: 0;
+    left: -100;
+    right: 10;
+    background-color: #334288;
+    z-index: 999;
+    border-radius: 0;
 }
 
 button {
@@ -69,7 +69,6 @@ button:hover {
 }
 
 /*搜尋出來的內容*/
-/* 表格樣式 */
 #searchresult table {
     width: 100%;
     border-collapse: collapse;
@@ -78,15 +77,15 @@ button:hover {
 
 #searchresult th,
 #searchresult td {
-    max-width: 250px; /* Adjust as needed */
-    word-wrap: break-word; /* Wrap text when exceeding width */
+    max-width: 250px;
+    word-wrap: break-word;
     border: 1px solid #ddd;
     padding: 8px;
 }
 
 #searchresult th {
     background-color: #f2f2f2;
-    text-align: left;
+    text-align: center;
 }
 
 #searchresult tbody tr {
@@ -96,8 +95,6 @@ button:hover {
 #searchresult tbody tr:hover {
     background-color: #f2f2f2;
 }
-
-
 
 .modal {
     display: none;
@@ -113,11 +110,17 @@ button:hover {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
-/*新增事項裡各個的間距*/
+/*新增事項裡各個東西的間距*/
 label {
     display: block;
     margin-bottom: 5px;
-    font-weight: bold;
+    margin-top: 50px;
+}
+
+/*排序篩選器*/
+.label11 {
+    display: block;
+    margin-bottom: 5px;
     margin-top: 50px;
 }
 
@@ -141,7 +144,7 @@ select {
     border: 1px solid #ccc;
     border-radius: 5px;
     outline: none;
-    margin-top: 20px;
+    margin-top: 0px;
 }
 
 /*搜尋*/
@@ -150,7 +153,6 @@ select {
     margin-top: 120px;
     position: fixed;
 }
-
 
 #searchbutton {
     background-color: #fb9393e1;
@@ -214,18 +216,16 @@ select {
 }
 
 #searchpriority {
-    margin-top: 0px; /* 調整優先級下拉選單與其他元素之間的距離 */
+    margin-top: 0px; /*調整優先級下拉選單與其他元素之間的距離*/
 }
-
 
 /*搜尋出來的內容*/
 .task.expired {
     background-color: #ffcccc;
-    color: red; /* Set text color to red for expired tasks */
+    color: red;
     position: relative;
     margin-top: 30px;
 }
-
 
 .task-container {
     margin-top: 50px;
@@ -240,7 +240,7 @@ select {
 #listtable td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align:center;
 }
 
 #listtable th {
@@ -271,7 +271,7 @@ select {
 
 /*預覽排序*/
 #sortby {
-    width: 800px;
+    width: 1100px;
     margin-top: 2%;
 }
 
@@ -323,13 +323,13 @@ select {
 }
 
 #listtable {
-    width: 100%;
+    width: 1200px;
 }
 
 #listtable th,
 #listtable td {
-    max-width: 250px; /* 這裡是一個示例值，你可以根據需要調整 */
-    word-wrap: break-word; /* 超出寬度時換行 */
+    max-width: 200px;
+    word-wrap: break-word; /*超出寬度時換行*/
 }
 
 .button-modify {
