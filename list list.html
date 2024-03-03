@@ -21,7 +21,6 @@
                 <button onclick="searchmodel()">搜尋</button>
                 <button onclick="displaymodel()">預覽</button>
                 <button onclick="displayaddmodal()">新增事項</button>
-                <!-- Removed Modify and Delete buttons -->
             </div>
         </div>
     </div>
@@ -47,7 +46,7 @@
             var homeimage = document.getElementById('homeimage');
             homeimage.style.display = 'block';
 
-            // 隱藏搜尋結果
+            //隱藏搜尋結果
             document.getElementById('searchresult').style.display = 'none';
         }
     </script>
@@ -73,8 +72,6 @@
     <!--加搜尋按鈕-->
     <button id="searchbutton">搜尋</button>
 </div>
-
-<!--在 previewmodal 下方加入這段代碼-->
 <div id="searchresult" style="display: none;">
     <h2>搜尋結果</h2>
     <table id="searchtable">
@@ -97,21 +94,7 @@
         return text.toLowerCase().includes(keyword);
     }
 
-    var tasks = [{
-        title: "完成作業",
-        priority: "一般",
-        assignee: "小明",
-        description: "完成數學作業",
-        deadline: "2024-03-01"
-    },
-    {
-        title: "準備會議",
-        priority: "緊急",
-        assignee: "小華",
-        description: "準備明天的會議材料",
-        deadline: "2024-02-28"
-    },
-    ];
+    var tasks = [];
 
     function searchmodel() {
         //關閉其他東西
@@ -120,33 +103,30 @@
         document.getElementById('searchcriteria').style.display = 'block';
         document.getElementById('modifylistmodal').style.display = 'none';
         document.getElementById('tasks').innerHTML = '';
-
-        // 隱藏搜尋結果
         document.getElementById('searchresult').style.display = 'none';
 
-        // Hide the home image
         var homeimage = document.getElementById('homeimage');
         homeimage.style.display = 'none';
     }
 
     function searchTasks() {
-        // 取得搜尋條件
+        //取得搜尋條件
         var searchnametitle = document.getElementById('searchnametitle').value.trim().toLowerCase();
         var searchpriority = document.getElementById('searchpriority').value.toLowerCase();
         var searchdeadline = document.getElementById('searchdeadline').value;
 
-        // 檢查是否只包含空格
+        //檢查是否只包含空格
         if (searchnametitle.replace(/\s/g, '').length === 0) {
             alert('關鍵字不能為空白！');
             return;
         }
-        // 取得搜索結果表格的 tbody 元素
+        //取得搜索結果表格的tbody元素
         var searchTableBody = document.querySelector('#searchresult table tbody');
 
-        // 清空搜索結果表格
+        //清空搜索結果表格
         searchTableBody.innerHTML = '';
 
-        // 過濾並顯示符合條件的任務
+        //過濾並顯示符合條件的事項
         tasks.forEach(function (task) {
             if (
                 (searchnametitle === '' || containkeyword(task.title, searchnametitle)) &&
@@ -157,13 +137,13 @@
             }
         });
 
-        // 顯示搜索結果區域
+        //顯示搜索結果的地方
         document.getElementById('searchresult').style.display = 'block';
 
-        // 關閉搜尋條件區域
+        //關閉搜尋條件的地方
         document.getElementById('searchcriteria').style.display = 'none';
 
-        // 清除輸入框的值
+        //清除輸入框的值
         document.getElementById('searchnametitle').value = '';
         document.getElementById('searchdeadline').value = '';
     }
@@ -175,7 +155,7 @@
     function displaySearchResult(container, task) {
         var taskRow = document.createElement('tr');
         if (isTaskExpired(task)) {
-            taskRow.classList.add('expired'); // 添加過期任務的 CSS 類名
+            taskRow.classList.add('expired');
         }
 
         taskRow.innerHTML = `
@@ -222,7 +202,7 @@
 <div id="previewmodal" style="display: none;">
     <h2>事項清單</h2>
     <!--排序下拉選單-->
-    <label for="sortby">排序篩選器：</label>
+    <label11 for="sortby">排序篩選器：</label11>
     <select id="sortby" onchange="sortlist(this.value)">
         <option value="farnear">遠到近</option>
         <option value="nearfar">近到遠</option>
@@ -249,31 +229,29 @@
 
 <script>
     function displaymodel() {
-        // 關閉其他部分
+        //關閉其他地方
         document.getElementById('searchcriteria').style.display = 'none';
         document.getElementById('addlistmodal').style.display = 'none';
         document.getElementById('previewmodal').style.display = 'block';
         document.getElementById('modifylistmodal').style.display = 'none';
         document.getElementById('tasks').innerHTML = '';
-
-        // 隱藏搜尋結果
         document.getElementById('searchresult').style.display = 'none';
 
-        // 隱藏首頁圖片
+        //隱藏首頁圖片
         var homeimage = document.getElementById('homeimage');
         homeimage.style.display = 'none';
 
-        // 獲取顯示列表的元素
+        //獲取顯示清單的元素
         var listtablebody = document.querySelector('#previewmodal table tbody');
 
-        // 清空先前的列表
+        //清空先前的清單
         listtablebody.innerHTML = '';
 
-        // 分割過期和未過期的任務
+        //分割過期和未過期的事項
         var expiredTasks = tasks.filter(task => isTaskExpired(task));
         var unexpiredTasks = tasks.filter(task => !isTaskExpired(task));
 
-        // 將被固定的任務移到未過期任務列表的最前面
+        //將被固定的事項移到未過期事項清單的最上面
         unexpiredTasks = unexpiredTasks.filter(task => !pinnedTasks.includes(task.title));
         pinnedTasks.forEach(taskTitle => {
             const pinnedTask = tasks.find(task => task.title === taskTitle && !isTaskExpired(task));
@@ -282,19 +260,18 @@
             }
         });
 
-        // 將過期的任務放在列表的最上面
+        //將過期的事項放在清單的最上面
         expiredTasks.forEach(function (task) {
             var taskRow = createlistrow(task);
             listtablebody.appendChild(taskRow);
         });
 
-        // 接著將未過期的任務加入列表
+        //將未過期的事項加入清單
         unexpiredTasks.forEach(function (task) {
             var taskRow = createlistrow(task);
             listtablebody.appendChild(taskRow);
         });
     }
-
 
     function createlistrow(task) {
         var taskRow = document.createElement('tr');
@@ -347,7 +324,7 @@
     }
 
     function sortlistproperty(property, ascending) {
-        //根據各種屬性和排序方式進行排序
+        //進行排序
         tasks.sort(function (a, b) {
             if (property === 'deadline') {
                 var dateA = new Date(a.deadline);
@@ -366,7 +343,7 @@
             }
         });
 
-        //重新整理清單列表
+        //重新整理清單
         displaymodel();
     }
 
@@ -385,12 +362,11 @@
     }
 
     function completelist(taskTitle) {
-        // 找到要完成的任務
         var taskIndex = tasks.findIndex(task => task.title === taskTitle);
         if (taskIndex !== -1) {
-            // 從清單中刪除完成的任務
+            //從清單中刪除完成的事項
             tasks.splice(taskIndex, 1);
-            // 重新顯示更新後的清單
+            //重新顯示更新後的清單
             displaymodel();
         } else {
             console.log("Task not found.");
@@ -404,24 +380,21 @@
         if (taskIndex !== -1) {
             if (!isTaskExpired(tasks[taskIndex])) {
                 if (!pinnedTasks.includes(taskTitle)) {
-                    // 如果任务尚未被釘選，則將其移到任务数组的頂部
                     tasks.unshift(tasks.splice(taskIndex, 1)[0]);
                     pinnedTasks.push(taskTitle);
                 } else {
-                    // 如果任务已被釘選，則取消釘選並将其移到任务数组的原始位置
                     pinnedTasks.splice(pinnedTasks.indexOf(taskTitle), 1);
                     tasks.splice(pinnedTasks.length, 0, tasks.splice(0, 1)[0]);
                 }
-                // 重新應用當前的排序狀態
                 sortlist(document.getElementById('sortby').value);
-                displaymodel(); // 重新顯示任務清單
+                displaymodel();
             } else {
                 alert("過期的任務不能被釘選！");
             }
         }
     }
 
-    // 創建任務行的函數，包括修改和刪除按鈕
+    //事項行的函數，包括修改和刪除按鈕
     function createlistrow(task) {
         var taskRow = document.createElement('tr');
         if (isTaskExpired(task)) {
@@ -442,44 +415,40 @@
     </td>
 `;
 
-
         return taskRow;
     }
 
     function modifyTask(taskTitle) {
-        // 關閉預覽部分
+        //關閉預覽部分
         document.getElementById('previewmodal').style.display = 'none';
 
         var taskIndex = tasks.findIndex(task => task.title === taskTitle);
         if (taskIndex !== -1) {
-            // 獲取任務的詳細信息
+            //事項的詳細訊息
             var task = tasks[taskIndex];
-            // 填充修改表單
-            document.getElementById('modifylisttitle').value = task.title; // 保持原始標題
+            //填充修改表單
+            document.getElementById('modifylisttitle').value = task.title;//保持原始標題
             document.getElementById('modifylistpriority').value = task.priority;
             document.getElementById('modifylistassignee').value = task.assignee;
             document.getElementById('modifylistdescripe').value = task.description;
             document.getElementById('modifylistdeadline').value = task.deadline;
-
-            // 保存要修改的任務標題
+            //保存要修改的事項標題
             document.getElementById('modifylisttitle').setAttribute('data-original-title', task.title);
-
-            // 顯示修改表單
+            //顯示修改表單
             document.getElementById('modifylistmodal').style.display = 'block';
         } else {
             console.log("Task not found.");
         }
     }
 
-
-    // 添加刪除任務的函數
+    //刪除事項的函數
     function deleteTask(taskTitle) {
         var taskIndex = tasks.findIndex(task => task.title === taskTitle);
         if (taskIndex !== -1) {
             var confirmed = confirm('確定要刪除此事項嗎？');
             if (confirmed) {
                 tasks.splice(taskIndex, 1);
-                displaymodel(); // 重新渲染列表
+                displaymodel();
                 alert('已成功刪除事項！');
             }
         } else {
@@ -488,8 +457,6 @@
     }
 
 </script>
-
-
 
 <!--新增事項-->
 <div id="addlistmodal">
@@ -539,8 +506,6 @@
         document.getElementById('homeimage').style.display = 'none';
         document.getElementById('modifylistmodal').style.display = 'none';
         document.getElementById('tasks').innerHTML = '';
-
-        // 隱藏搜尋結果
         document.getElementById('searchresult').style.display = 'none';
     }
 
@@ -558,7 +523,7 @@
 
         //檢查是否有必填的東西是空的
         if (!title || !priority || !assignee || !deadline) {
-            alert('請填寫所有必填字段！'); // 提示使用者必須填寫所有條件
+            alert('請填寫所有必填字段！'); //必須填寫所有條件
             return;
         }
 
@@ -572,7 +537,7 @@
 
         tasks.push(task);
 
-        // 清除輸入字段
+        //清除輸入字段
         document.getElementById('addlisttitle').value = '';
         document.getElementById('addlistpriority').value = '';
         document.getElementById('addlistassignee').value = '';
@@ -623,7 +588,7 @@
 
 <script>
     function submitModification() {
-        // 獲取修改後的值
+        //獲得修改後的值
         var originalTitle = document.getElementById('modifylisttitle').getAttribute('data-original-title');
         var title = document.getElementById('modifylisttitle').value;
         var priority = document.getElementById('modifylistpriority').value;
@@ -631,33 +596,27 @@
         var description = document.getElementById('modifylistdescripe').value;
         var deadline = document.getElementById('modifylistdeadline').value;
 
-        // 根據原始標題找到要修改的任務
         var taskIndex = tasks.findIndex(task => task.title === originalTitle);
         if (taskIndex !== -1) {
-            // 更新任務的屬性
-            tasks[taskIndex].title = title; // 更新標題
+            //更新任務
+            tasks[taskIndex].title = title;
             tasks[taskIndex].priority = priority;
             tasks[taskIndex].assignee = assignee;
             tasks[taskIndex].description = description;
             tasks[taskIndex].deadline = deadline;
-
-            // 重新顯示任務清單
+            //重新顯示任務清單
             displaymodel();
-
-            // 關閉修改表單
+            //關閉修改表單
             closeModifyListModal();
         } else {
             console.log("Task not found.");
         }
     }
 
-
     function closeModifyListModal() {
         document.getElementById('modifylistmodal').style.display = 'none';
     }
 </script>
-
-
 
 </body>
 
